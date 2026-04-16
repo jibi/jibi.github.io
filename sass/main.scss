@@ -45,6 +45,11 @@ pre {
   padding: 6px 6px;
 }
 
+pre.scroll-code {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 :not(pre) > code {
   padding: 2px;
 }

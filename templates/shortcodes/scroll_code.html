@@ -1,0 +1,6 @@
+{% if path is defined %}
+{% set content = load_data(path=path, format="plain") %}
+<pre class="scroll-code"><code>{{ content }}</code></pre>
+{% else %}
+<pre class="scroll-code"><code>{{ body }}</code></pre>
+{% endif %}
