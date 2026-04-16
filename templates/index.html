@@ -7,7 +7,10 @@
 {% set posts = get_section(path="blog/_index.md") %}
 <ul class="post-list">
   {% for page in posts.pages %}
-  <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
+  <li>
+    <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+  </li>
   {% endfor %}
 </ul>
 {% endblock content %}
