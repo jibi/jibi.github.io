@@ -20,6 +20,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v6.0.1
 
+      - name: Enable analytics for production
+        run: sed -i 's/analytics = false/analytics = true/' config.toml
+
       - name: Build Zola + upload Pages artifact
         uses: getzola/github-pages@066755243e69f508fd1a74739fbf1a65f656c790
         with:

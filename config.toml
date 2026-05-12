@@ -10,4 +10,4 @@ build_search_index = false
 [markdown]
 
 [extra]
-# Put all your custom variables here
+analytics = false
