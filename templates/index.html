@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Posts
-</h1>
 {% set posts = get_section(path="blog/_index.md") %}
 <ul class="post-list">
   {% for page in posts.pages %}
