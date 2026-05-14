@@ -13,6 +13,11 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script>
   {% if config.extra.analytics %}
   <script defer src="https://stats.jibi.io/script.js" data-website-id="b8438c09-8347-424b-9407-2d2ff855319b"></script>
+  <script>
+    window.addEventListener('pagehide', function () {
+      if (window.umami) window.umami.track('leave');
+    });
+  </script>
   {% endif %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
