@@ -1,0 +1,920 @@
+tcp_sendmsg() {
+  lock_sock_nested() {
+    __cond_resched()
+    _raw_spin_lock_bh()
+    _raw_spin_unlock_bh() {
+      __local_bh_enable_ip()
+    }
+  }
+  tcp_sendmsg_locked() {
+    tcp_rate_check_app_limited()
+    tcp_send_mss() {
+      tcp_current_mss() {
+        ipv4_mtu() {
+          __rcu_read_lock()
+          __rcu_read_unlock()
+        }
+        tcp_established_options()
+      }
+    }
+    tcp_stream_memory_free()
+    tcp_stream_alloc_skb() {
+      __alloc_skb() {
+        kmem_cache_alloc_node_noprof() {
+          __cond_resched()
+          __alloc_tagging_slab_alloc_hook()
+        }
+        kmalloc_reserve() {
+          kmem_cache_alloc_node_noprof() {
+            __cond_resched()
+            __alloc_tagging_slab_alloc_hook()
+          }
+        }
+        __build_skb_around()
+      }
+      sk_forced_mem_schedule() {
+        mem_cgroup_sk_charge() {
+          try_charge_memcg()
+          mod_memcg_state() {
+            css_rstat_updated()
+          }
+        }
+      }
+    }
+    tcp_skb_entail() {
+      tcp_chrono_start()
+      tcp_cwnd_restart() {
+        tcp_init_cwnd()
+        cubictcp_cwnd_event()
+      }
+    }
+    sk_page_frag_refill() {
+      skb_page_frag_refill() {
+        alloc_pages_noprof() {
+          alloc_pages_mpol() {
+            policy_nodemask()
+            __alloc_frozen_pages_noprof() {
+              __next_zones_zonelist()
+              get_page_from_freelist() {
+                __zone_watermark_ok()
+                _raw_spin_trylock()
+                _raw_spin_unlock()
+                __pgalloc_tag_add() {
+                  static_key_count()
+                  page_ext_get() {
+                    __rcu_read_lock()
+                  }
+                  static_key_count()
+                  static_key_count()
+                  page_ext_put() {
+                    __rcu_read_unlock()
+                  }
+                }
+                prep_compound_page()
+              }
+            }
+              arch_irq_work_raise() {
+                x2apic_send_IPI_self() {
+                  irq_enter_rcu() {
+                    irqtime_account_irq()
+                  }
+                  __sysvec_irq_work() {
+                    __wake_up() {
+                      _raw_spin_lock_irqsave()
+                      __wake_up_common()
+                      _raw_spin_unlock_irqrestore()
+                    }
+                    _raw_spin_lock()
+                    _raw_spin_unlock()
+                    __wake_up() {
+                      _raw_spin_lock_irqsave()
+                      __wake_up_common()
+                      _raw_spin_unlock_irqrestore()
+                    }
+                  }
+                  irq_exit_rcu() {
+                    irqtime_account_irq()
+                    sched_core_idle_cpu()
+                  }
+                }
+              }
+          }
+        }
+      }
+    }
+    tcp_wmem_schedule()
+    __check_object_size() {
+      check_stack_object()
+      is_vmalloc_addr()
+      __virt_addr_valid()
+    }
+    tcp_push() {
+      __tcp_push_pending_frames() {
+        tcp_write_xmit() {
+          ktime_get()
+          tcp_tso_segs()
+          tcp_small_queue_check.isra.0()
+          __tcp_transmit_skb() {
+            skb_clone() {
+              __copy_skb_header()
+            }
+            tcp_established_options()
+            skb_push()
+            __tcp_select_window()
+            tcp_options_write.isra.0()
+            bpf_skops_write_hdr_opt.isra.0()
+            tcp_v4_send_check()
+            cubictcp_cwnd_event()
+            ip_queue_xmit() {
+              __ip_queue_xmit() {
+                __rcu_read_lock()
+                __sk_dst_check() {
+                  ipv4_dst_check() {
+                    __rcu_read_lock()
+                    __rcu_read_unlock()
+                  }
+                }
+                skb_push()
+                __rcu_read_lock()
+                __rcu_read_unlock()
+                ip_local_out() {
+                  __ip_local_out() {
+                    ip_send_check()
+                    __rcu_read_lock() {
+                    }
+                    nf_hook_slow() {
+                      ipv4_conntrack_defrag()
+                      ipv4_conntrack_local() {
+                        nf_conntrack_in() {
+                          ipv4_get_l4proto()
+                          nf_ct_get_tuple()
+                          hash_conntrack_raw()
+                          __nf_conntrack_find_get()
+                          nf_conntrack_tcp_packet() {
+                            _raw_spin_lock_bh()
+                            nf_ct_seq_offset()
+                            _raw_spin_unlock_bh() {
+                              __local_bh_enable_ip()
+                            }
+                            __nf_ct_refresh_acct()
+                          }
+                        }
+                      }
+                      nf_nat_ipv4_local_fn() {
+                        nf_nat_inet_fn()
+                      }
+                      nft_do_chain_ipv4() {
+                        nft_do_chain() {
+                          nft_counter_eval() {
+                            __local_bh_enable_ip()
+                          }
+                          nft_immediate_eval()
+                          nft_meta_get_eval() {
+                            nft_meta_store_ifname()
+                          }
+                          nft_meta_get_eval() {
+                            nft_meta_store_ifname()
+                          }
+                          nft_meta_get_eval() {
+                            nft_meta_store_ifname()
+                          }
+                          nft_meta_get_eval() {
+                            nft_meta_store_ifname()
+                          }
+                          nft_update_chain_stats() {
+                            __local_bh_enable_ip()
+                          }
+                        }
+                      }
+                    }
+                    __rcu_read_unlock()
+                  }
+                  ip_output() {
+                    __rcu_read_lock()
+                    __rcu_read_lock()
+                    nf_hook_slow() {
+                      nft_do_chain_ipv4() {
+                        nft_do_chain() {
+                          nft_counter_eval() {
+                            __local_bh_enable_ip()
+                          }
+                          nft_immediate_eval()
+                          nft_meta_get_eval() {
+                            nft_meta_store_ifname()
+                          }
+                          nft_update_chain_stats() {
+                            __local_bh_enable_ip()
+                          }
+                        }
+                      }
+                      nf_nat_ipv4_out() {
+                        nf_nat_inet_fn()
+                      }
+                      nf_confirm()
+                    }
+                    __rcu_read_unlock()
+                    ip_finish_output() {
+                      __cgroup_bpf_run_filter_skb() {
+                        __rcu_read_lock() {
+                        }
+                        __rcu_read_unlock()
+                      }
+                      __ip_finish_output() {
+                        __rcu_read_lock()
+                        __rcu_read_unlock()
+                        ip_finish_output2() {
+                          __rcu_read_lock()
+                          __dev_queue_xmit() {
+                            qdisc_pkt_len_segs_init()
+                            netdev_core_pick_tx()
+                            validate_xmit_skb() {
+                              netif_skb_features() {
+                                skb_network_protocol()
+                              }
+                              skb_csum_hwoffload_help()
+                              validate_xmit_xfrm()
+                            }
+                            dev_hard_start_xmit() {
+                              loopback_xmit() {
+                                tcp_wfree() {
+                                  sk_free()
+                                }
+                                eth_type_trans()
+                                __netif_rx() {
+                                  netif_rx_internal() {
+                                    enqueue_to_backlog() {
+                                      _raw_spin_lock_irqsave()
+                                      _raw_spin_unlock_irqrestore()
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                            __local_bh_enable_ip() {
+                              do_softirq.part.0() {
+                                __do_softirq() {
+                                  handle_softirqs() {
+                                    irqtime_account_irq()
+                                    net_rx_action() {
+                                      __usecs_to_jiffies()
+                                      skb_defer_free_flush()
+                                      __napi_poll() {
+                                        process_backlog() {
+                                          _raw_spin_lock_irq()
+                                          _raw_spin_unlock_irq()
+                                          __rcu_read_lock()
+                                          __netif_receive_skb() {
+                                            __netif_receive_skb_one_core() {
+                                              __netif_receive_skb_core.constprop.0()
+                                              ip_rcv() {
+                                                ip_rcv_core()
+                                                __rcu_read_lock()
+                                                nf_hook_slow() {
+                                                  ip_sabotage_in()
+                                                  ipv4_conntrack_defrag()
+                                                  nft_do_chain_ipv4() {
+                                                    nft_do_chain() {
+                                                      nft_update_chain_stats() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                    }
+                                                  }
+                                                  ipv4_conntrack_in() {
+                                                    nf_conntrack_in()
+                                                  }
+                                                  nft_do_chain_ipv4() {
+                                                    nft_do_chain() {
+                                                      nft_counter_eval() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                      nft_immediate_eval()
+                                                      nft_match_eval() {
+                                                        rpfilter_mt()
+                                                      }
+                                                      nft_counter_eval() {
+                                                        __local_bh_enable_ip() {
+                                                        }
+                                                      }
+                                                      nft_immediate_eval()
+                                                      nft_update_chain_stats() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                    }
+                                                  }
+                                                  nf_nat_ipv4_pre_routing() {
+                                                    nf_nat_inet_fn()
+                                                  }
+                                                }
+                                                __rcu_read_unlock()
+                                                ip_rcv_finish_core()
+                                                ip_local_deliver() {
+                                                  __rcu_read_lock()
+                                                  nf_hook_slow() {
+                                                    nft_do_chain_ipv4() {
+                                                      nft_do_chain() {
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                      }
+                                                    }
+                                                    nf_nat_ipv4_local_in() {
+                                                      nf_nat_inet_fn()
+                                                    }
+                                                    nf_confirm()
+                                                  }
+                                                  __rcu_read_unlock()
+                                                  ip_local_deliver_finish() {
+                                                    __rcu_read_lock()
+                                                    ip_protocol_deliver_rcu() {
+                                                      raw_local_deliver() {
+                                                        __rcu_read_lock()
+                                                        __rcu_read_unlock()
+                                                      }
+                                                      tcp_v4_rcv() {
+                                                        __inet_lookup_established() {
+                                                          inet_ehashfn()
+                                                        }
+                                                        tcp_inbound_hash() {
+                                                          tcp_do_parse_auth_options()
+                                                        }
+                                                        sk_filter_trim_cap() {
+                                                          __cgroup_bpf_run_filter_skb() {
+                                                            __rcu_read_lock()
+                                                            __rcu_read_unlock()
+                                                          }
+                                                          security_sock_rcv_skb() {
+                                                            bpf_lsm_socket_sock_rcv_skb()
+                                                          }
+                                                          __rcu_read_lock()
+                                                          __rcu_read_unlock()
+                                                        }
+                                                        tcp_v4_fill_cb()
+                                                        _raw_spin_lock()
+                                                        tcp_v4_do_rcv() {
+                                                          ipv4_dst_check() {
+                                                            __rcu_read_lock()
+                                                            __rcu_read_unlock()
+                                                          }
+                                                          tcp_rcv_established() {
+                                                            tcp_mstamp_refresh() {
+                                                              ktime_get()
+                                                            }
+                                                            tcp_ack() {
+                                                              ktime_get_seconds()
+                                                              tcp_in_ack_event()
+                                                            }
+                                                            tcp_urg()
+                                                            tcp_data_queue() {
+                                                              dst_release()
+                                                              tcp_try_rmem_schedule() {
+                                                                __sk_mem_schedule() {
+                                                                  __sk_mem_raise_allocated() {
+                                                                    mem_cgroup_sk_charge() {
+                                                                      try_charge_memcg()
+                                                                      mod_memcg_state() {
+                                                                        css_rstat_updated()
+                                                                      }
+                                                                    }
+                                                                    sk_leave_memory_pressure() {
+                                                                      tcp_leave_memory_pressure()
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                              tcp_queue_rcv()
+                                                              tcp_event_data_recv() {
+                                                                tcp_measure_rcv_mss()
+                                                                tcp_data_ecn_check()
+                                                              }
+                                                              tcp_data_ready() {
+                                                                sock_def_readable() {
+                                                                  __rcu_read_lock()
+                                                                  __wake_up_sync_key() {
+                                                                    _raw_spin_lock_irqsave()
+                                                                    __wake_up_common() {
+                                                                      pollwake() {
+                                                                        default_wake_function() {
+                                                                          try_to_wake_up() {
+                                                                            _raw_spin_lock_irqsave()
+                                                                            select_task_rq_fair() {
+                                                                              __rcu_read_lock()
+                                                                              wake_affine()
+                                                                              cpus_share_cache()
+                                                                              __rcu_read_unlock()
+                                                                            }
+                                                                            ttwu_queue_wakelist() {
+                                                                              scx_allow_ttwu_queue()
+                                                                              __smp_call_single_queue() {
+                                                                                call_function_single_prep_ipi()
+                                                                              }
+                                                                            }
+                                                                            _raw_spin_unlock_irqrestore()
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                      pollwake()
+                                                                    }
+                                                                    _raw_spin_unlock_irqrestore()
+                                                                  }
+                                                                  __rcu_read_unlock()
+                                                                }
+                                                              }
+                                                            }
+                                                            tcp_check_space()
+                                                            __tcp_ack_snd_check() {
+                                                              tcp_send_ack() {
+                                                                __tcp_send_ack.part.0() {
+                                                                  __alloc_skb() {
+                                                                    napi_skb_cache_get()
+                                                                    __local_bh_enable_ip()
+                                                                    kmem_cache_alloc_node_noprof() {
+                                                                      __alloc_tagging_slab_alloc_hook()
+                                                                    }
+                                                                    kmalloc_reserve() {
+                                                                      kmem_cache_alloc_node_noprof() {
+                                                                        __alloc_tagging_slab_alloc_hook()
+                                                                      }
+                                                                    }
+                                                                    __build_skb_around()
+                                                                  }
+                                                                  __tcp_transmit_skb() {
+                                                                    tcp_established_options()
+                                                                    skb_push()
+                                                                    __tcp_select_window()
+                                                                    tcp_options_write.isra.0()
+                                                                    bpf_skops_write_hdr_opt.isra.0()
+                                                                    tcp_v4_send_check()
+                                                                    ip_queue_xmit() {
+                                                                      __ip_queue_xmit() {
+                                                                        __rcu_read_lock()
+                                                                        __sk_dst_check() {
+                                                                          ipv4_dst_check() {
+                                                                            __rcu_read_lock()
+                                                                            __rcu_read_unlock()
+                                                                          }
+                                                                        }
+                                                                        skb_push()
+                                                                        __rcu_read_lock()
+                                                                        __rcu_read_unlock()
+                                                                        ip_local_out() {
+                                                                          __ip_local_out() {
+                                                                            ip_send_check()
+                                                                            __rcu_read_lock()
+                                                                            nf_hook_slow() {
+                                                                              ipv4_conntrack_defrag()
+                                                                              ipv4_conntrack_local() {
+                                                                                nf_conntrack_in() {
+                                                                                  ipv4_get_l4proto()
+                                                                                  nf_ct_get_tuple()
+                                                                                  hash_conntrack_raw()
+                                                                                  __nf_conntrack_find_get()
+                                                                                  nf_conntrack_tcp_packet() {
+                                                                                    _raw_spin_lock_bh()
+                                                                                    nf_ct_seq_offset()
+                                                                                    _raw_spin_unlock_bh() {
+                                                                                      __local_bh_enable_ip()
+                                                                                    }
+                                                                                    __nf_ct_refresh_acct()
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                              nf_nat_ipv4_local_fn() {
+                                                                                nf_nat_inet_fn() {
+                                                                                }
+                                                                              }
+                                                                              nft_do_chain_ipv4() {
+                                                                                nft_do_chain() {
+                                                                                  nft_counter_eval() {
+                                                                                    __local_bh_enable_ip()
+                                                                                  }
+                                                                                  nft_immediate_eval()
+                                                                                  nft_meta_get_eval() {
+                                                                                    nft_meta_store_ifname()
+                                                                                  }
+                                                                                  nft_meta_get_eval() {
+                                                                                    nft_meta_store_ifname()
+                                                                                  }
+                                                                                  nft_meta_get_eval() {
+                                                                                    nft_meta_store_ifname()
+                                                                                  }
+                                                                                  nft_meta_get_eval() {
+                                                                                    nft_meta_store_ifname()
+                                                                                  }
+                                                                                  nft_update_chain_stats() {
+                                                                                    __local_bh_enable_ip()
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                            __rcu_read_unlock()
+                                                                          }
+                                                                          ip_output() {
+                                                                            __rcu_read_lock()
+                                                                            __rcu_read_lock()
+                                                                            nf_hook_slow() {
+                                                                              nft_do_chain_ipv4() {
+                                                                                nft_do_chain() {
+                                                                                  nft_counter_eval() {
+                                                                                    __local_bh_enable_ip()
+                                                                                  }
+                                                                                  nft_immediate_eval()
+                                                                                  nft_meta_get_eval() {
+                                                                                    nft_meta_store_ifname()
+                                                                                  }
+                                                                                  nft_update_chain_stats() {
+                                                                                    __local_bh_enable_ip()
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                              nf_nat_ipv4_out() {
+                                                                                nf_nat_inet_fn()
+                                                                              }
+                                                                              nf_confirm()
+                                                                            }
+                                                                            __rcu_read_unlock()
+                                                                            ip_finish_output() {
+                                                                              __cgroup_bpf_run_filter_skb() {
+                                                                                __rcu_read_lock()
+                                                                                __rcu_read_unlock()
+                                                                              }
+                                                                              __ip_finish_output() {
+                                                                                __rcu_read_lock()
+                                                                                __rcu_read_unlock()
+                                                                                ip_finish_output2() {
+                                                                                  __rcu_read_lock()
+                                                                                  __dev_queue_xmit() {
+                                                                                    qdisc_pkt_len_segs_init()
+                                                                                    netdev_core_pick_tx()
+                                                                                    validate_xmit_skb() {
+                                                                                      netif_skb_features() {
+                                                                                        skb_network_protocol()
+                                                                                      }
+                                                                                      skb_csum_hwoffload_help()
+                                                                                      validate_xmit_xfrm()
+                                                                                    }
+                                                                                    dev_hard_start_xmit() {
+                                                                                      loopback_xmit() {
+                                                                                        __sock_wfree() {
+                                                                                        }
+                                                                                        eth_type_trans()
+                                                                                        __netif_rx() {
+                                                                                          netif_rx_internal() {
+                                                                                            enqueue_to_backlog() {
+                                                                                              _raw_spin_lock_irqsave()
+                                                                                              _raw_spin_unlock_irqrestore()
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                    __local_bh_enable_ip()
+                                                                                  }
+                                                                                  __rcu_read_unlock()
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                            __rcu_read_unlock()
+                                                                          }
+                                                                        }
+                                                                        __rcu_read_unlock()
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                        _raw_spin_unlock()
+                                                      }
+                                                    }
+                                                    __rcu_read_unlock()
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                          __rcu_read_unlock()
+                                          _raw_spin_lock_irq()
+                                          _raw_spin_unlock_irq()
+                                          __rcu_read_lock()
+                                          __netif_receive_skb() {
+                                            __netif_receive_skb_one_core() {
+                                              __netif_receive_skb_core.constprop.0()
+                                              ip_rcv() {
+                                                ip_rcv_core()
+                                                __rcu_read_lock()
+                                                nf_hook_slow() {
+                                                  ip_sabotage_in()
+                                                  ipv4_conntrack_defrag()
+                                                  nft_do_chain_ipv4() {
+                                                    nft_do_chain() {
+                                                      nft_update_chain_stats() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                    }
+                                                  }
+                                                  ipv4_conntrack_in() {
+                                                    nf_conntrack_in()
+                                                  }
+                                                  nft_do_chain_ipv4() {
+                                                    nft_do_chain() {
+                                                      nft_counter_eval() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                      nft_immediate_eval()
+                                                      nft_match_eval() {
+                                                        rpfilter_mt()
+                                                      }
+                                                      nft_counter_eval() {
+                                                        __local_bh_enable_ip() {
+                                                        }
+                                                      }
+                                                      nft_immediate_eval()
+                                                      nft_update_chain_stats() {
+                                                        __local_bh_enable_ip()
+                                                      }
+                                                    }
+                                                  }
+                                                  nf_nat_ipv4_pre_routing() {
+                                                    nf_nat_inet_fn()
+                                                  }
+                                                }
+                                                __rcu_read_unlock()
+                                                ip_rcv_finish_core()
+                                                ip_local_deliver() {
+                                                  __rcu_read_lock()
+                                                  nf_hook_slow() {
+                                                    nft_do_chain_ipv4() {
+                                                      nft_do_chain() {
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_meta_get_eval() {
+                                                          nft_meta_store_ifname()
+                                                        }
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                        nft_counter_eval() {
+                                                          __local_bh_enable_ip()
+                                                        }
+                                                        nft_immediate_eval()
+                                                      }
+                                                    }
+                                                    nf_nat_ipv4_local_in() {
+                                                      nf_nat_inet_fn()
+                                                    }
+                                                    nf_confirm()
+                                                  }
+                                                  __rcu_read_unlock()
+                                                  ip_local_deliver_finish() {
+                                                    __rcu_read_lock()
+                                                    ip_protocol_deliver_rcu() {
+                                                      raw_local_deliver() {
+                                                        __rcu_read_lock()
+                                                        __rcu_read_unlock()
+                                                      }
+                                                      tcp_v4_rcv() {
+                                                        __inet_lookup_established() {
+                                                          inet_ehashfn()
+                                                        }
+                                                        tcp_inbound_hash() {
+                                                          tcp_do_parse_auth_options()
+                                                        }
+                                                        sk_filter_trim_cap() {
+                                                          __cgroup_bpf_run_filter_skb() {
+                                                            __rcu_read_lock()
+                                                            __rcu_read_unlock()
+                                                          }
+                                                          security_sock_rcv_skb() {
+                                                            bpf_lsm_socket_sock_rcv_skb()
+                                                          }
+                                                          __rcu_read_lock()
+                                                          __rcu_read_unlock()
+                                                        }
+                                                        tcp_v4_fill_cb()
+                                                        _raw_spin_lock()
+                                                        tcp_add_backlog() {
+                                                          skb_condense()
+                                                          dst_release()
+                                                        }
+                                                        _raw_spin_unlock()
+                                                      }
+                                                    }
+                                                    __rcu_read_unlock()
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                          __rcu_read_unlock()
+                                          _raw_spin_lock_irq()
+                                          _raw_spin_unlock_irq()
+                                        }
+                                      }
+                                      skb_defer_free_flush() {
+                                        napi_consume_skb() {
+                                          skb_release_head_state()
+                                          skb_release_data()
+                                          kfree_skbmem()
+                                        }
+                                      }
+                                    }
+                                    irqtime_account_irq()
+                                  }
+                                }
+                              }
+                            }
+                          }
+                          __rcu_read_unlock()
+                        }
+                      }
+                    }
+                    __rcu_read_unlock()
+                  }
+                }
+                __rcu_read_unlock()
+              }
+            }
+            tcp_update_skb_after_send()
+            tcp_rate_skb_sent()
+          }
+          tcp_event_new_data_sent() {
+            tcp_rbtree_insert()
+            tcp_rearm_rto() {
+              sk_reset_timer() {
+                mod_timer() {
+                  lock_timer_base() {
+                    _raw_spin_lock_irqsave()
+                  }
+                  detach_if_pending()
+                  calc_wheel_index()
+                  enqueue_timer()
+                  _raw_spin_unlock_irqrestore()
+                }
+              }
+            }
+            tcp_check_space()
+          }
+          tcp_chrono_stop()
+          tcp_schedule_loss_probe.part.0() {
+            jiffies_to_usecs()
+            __usecs_to_jiffies()
+            jiffies_to_usecs()
+            __usecs_to_jiffies()
+            sk_reset_timer() {
+              mod_timer()
+            }
+          }
+        }
+      }
+    }
+  }
+  release_sock() {
+    _raw_spin_lock_bh()
+    __release_sock() {
+      _raw_spin_unlock_bh() {
+        __local_bh_enable_ip()
+      }
+      tcp_v4_do_rcv() {
+        tcp_rcv_established() {
+          tcp_mstamp_refresh() {
+            ktime_get()
+          }
+          inet_sk_rx_dst_set()
+          tcp_validate_incoming()
+          tcp_ack() {
+            ktime_get_seconds()
+            tcp_sync_mss()
+            tcp_rack_advance()
+            tcp_rate_skb_delivered()
+            tcp_ack_tstamp()
+            __sk_mem_reclaim() {
+              __sk_mem_reduce_allocated() {
+                mem_cgroup_sk_uncharge() {
+                  mod_memcg_state() {
+                    css_rstat_updated()
+                  }
+                  refill_stock()
+                }
+              }
+            }
+            __kfree_skb() {
+              skb_release_head_state()
+              skb_release_data() {
+                skb_free_head() {
+                  kmem_cache_free() {
+                    __memcg_slab_free_hook()
+                    __alloc_tagging_slab_free_hook()
+                  }
+                }
+              }
+              kfree_skbmem() {
+                kmem_cache_free() {
+                  __memcg_slab_free_hook()
+                  __alloc_tagging_slab_free_hook()
+                }
+              }
+            }
+            tcp_chrono_stop()
+            tcp_ack_update_rtt() {
+              jiffies_to_usecs()
+              __usecs_to_jiffies()
+            }
+            cubictcp_acked()
+            tcp_rack_update_reo_wnd()
+            tcp_in_ack_event()
+            tcp_schedule_loss_probe() {
+              tcp_schedule_loss_probe.part.0()
+            }
+            tcp_rearm_rto()
+            tcp_newly_delivered()
+            tcp_rate_gen()
+            cubictcp_cong_avoid()
+            tcp_update_pacing_rate()
+            tcp_xmit_recovery()
+          }
+          tcp_urg()
+          tcp_data_queue() {
+            __kfree_skb() {
+              skb_release_head_state()
+              skb_release_data() {
+                skb_free_head() {
+                  kmem_cache_free() {
+                    __memcg_slab_free_hook()
+                    __alloc_tagging_slab_free_hook()
+                  }
+                }
+              }
+              kfree_skbmem() {
+                kmem_cache_free() {
+                  __memcg_slab_free_hook()
+                  __alloc_tagging_slab_free_hook()
+                }
+              }
+            }
+          }
+          tcp_check_space()
+        }
+      }
+      _raw_spin_lock_bh()
+    }
+    tcp_release_cb()
+    _raw_spin_unlock_bh() {
+      __local_bh_enable_ip()
+    }
+  }
+}
