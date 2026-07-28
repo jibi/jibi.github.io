@@ -10,6 +10,8 @@
 
   <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
 
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path="atom.xml") | safe }}">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
