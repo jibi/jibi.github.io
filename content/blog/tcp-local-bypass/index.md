@@ -1,6 +1,7 @@
 +++
 title = "TCP local bypass"
 date = 2026-07-28
+description = "Bypassing the Linux TCP stack for local connections with a Rust kernel module: shared ring buffers, socket wait queues and some ftrace hooks."
 +++
 
 While running some local TCP services that were bandwidth bound, I started

@@ -1,6 +1,7 @@
 +++
 title = "XDP without eBPF (aka learning some Rust LKM)"
 date = 2026-03-04
+description = "Running packet processing code in the XDP fast path from a Rust loadable kernel module, bypassing eBPF and its verifier."
 +++
 
 It's been about 10 years since [XDP was born at Netdev Conf 1.1 in Seville](https://medium.com/@tom_84912/happy-birthday-xdp-a971b8ac75e6)!

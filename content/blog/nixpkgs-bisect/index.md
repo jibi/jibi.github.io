@@ -1,6 +1,7 @@
 +++
 title = "fun bisecting nixpkgs"
 date = 2026-05-12
+description = "Tracking down a NixOS cross compilation build failure on a Raspberry Pi by bisecting nixpkgs."
 +++
 
 After updating some stuff on my Raspberry Pi and trying to deploy a new NixOS

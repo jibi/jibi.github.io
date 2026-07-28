@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block title %}{{ page.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+{% block canonical %}{{ page.permalink | safe }}{% endblock canonical %}
+{% block og_type %}article{% endblock og_type %}
+
 {% block content %}
 <h1 class="title">
   {{ page.title }}
