@@ -67,7 +67,7 @@ running on the same box (note that this is just the data transmission part, the
 connection is already established). We'll start from `tcp_sendmsg()` and go
 through the entire network stack calltrace:
 
-{{ scroll_code(path="content/blog/tcp-local-bypass/tcp_sendmsg") }}
+{{<scroll_code path="content/blog/tcp-local-bypass/tcp_sendmsg" />}}
 
 To my surprise, a single `tcp_sendmsg()` call on loopback captures the entire
 roundtrip. Here's a non exhaustive summary to get a rough idea of what's going
@@ -556,7 +556,7 @@ hurray, it works! But that's pretty much the end of the good news :/ how is it
 possible that we can only achieve roughly a quarter of the bandwidth we would
 get _without_ the bypass? Are we even bypassing? `trace-cmd` to the rescue:
 
-{{ scroll_code(path="content/blog/tcp-local-bypass/tcp_sendmsg_hook_1") }}
+{{<scroll_code path="content/blog/tcp-local-bypass/tcp_sendmsg_hook_1" />}}
 
 Yes, the calltrace is much shorter, and we can spot the 2
 `__inet_lookup_established`, `tcp_send_rcvq()` and `sk_data_ready`. How do we

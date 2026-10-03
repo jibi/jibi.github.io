@@ -128,7 +128,7 @@ Here's the same thing as a diagram from the
 [CONTRIBUTING](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#staging)
 doc:
 
-{{ image(path="nixpkgs-branching.png", width=600) }}
+{{<image path="nixpkgs-branching.png" width={600} />}}
 
 The relevant bit for us: Hydra builds and caches (besides manual runs) what
 lands on the tip of `master` and `staging-next` (`master` then gets
